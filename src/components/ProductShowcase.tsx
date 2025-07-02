@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Check } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const ProductShowcase = () => {
   const iPadModels = [
@@ -141,43 +142,51 @@ const ProductShowcase = () => {
             <p className="text-lg text-gray-600">Thiết bị học tập đa năng, mang sức mạnh máy tính trong thân hình siêu mỏng</p>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8">
-            {iPadModels.map((model, index) => (
-              <Card key={index} className={`relative hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in ${model.popular ? 'border-2 border-blue-500' : ''}`} style={{animationDelay: `${index * 150}ms`}}>
-                {model.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white">
-                    Phổ biến nhất
-                  </Badge>
-                )}
-                <CardContent className="p-8">
-                  <img 
-                    src={model.image} 
-                    alt={model.name}
-                    className="w-full h-48 object-cover rounded-lg mb-6"
-                  />
-                  <h4 className="text-2xl font-bold text-gray-900 mb-2">{model.name}</h4>
-                  <div className="mb-4">
-                    <p className="text-gray-500 line-through">{model.price}</p>
-                    <p className="text-2xl font-bold text-blue-600">{model.educationPrice}</p>
-                    <p className="text-sm text-green-600 font-medium">Giá giáo dục</p>
+          <Carousel className="w-full max-w-7xl mx-auto">
+            <CarouselContent className="-ml-1">
+              {iPadModels.map((model, index) => (
+                <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <Card className={`relative hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in ${model.popular ? 'border-2 border-blue-500' : ''}`} style={{animationDelay: `${index * 150}ms`}}>
+                      {model.popular && (
+                        <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white">
+                          Phổ biến nhất
+                        </Badge>
+                      )}
+                      <CardContent className="p-8">
+                        <img 
+                          src={model.image} 
+                          alt={model.name}
+                          className="w-full h-48 object-cover rounded-lg mb-6"
+                        />
+                        <h4 className="text-2xl font-bold text-gray-900 mb-2">{model.name}</h4>
+                        <div className="mb-4">
+                          <p className="text-gray-500 line-through">{model.price}</p>
+                          <p className="text-2xl font-bold text-blue-600">{model.educationPrice}</p>
+                          <p className="text-sm text-green-600 font-medium">Giá giáo dục</p>
+                        </div>
+                        <p className="text-blue-600 font-medium mb-4">{model.bestFor}</p>
+                        <ul className="space-y-2 mb-6">
+                          {model.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-center text-gray-600">
+                              <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                          Tìm hiểu thêm
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <p className="text-blue-600 font-medium mb-4">{model.bestFor}</p>
-                  <ul className="space-y-2 mb-6">
-                    {model.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-gray-600">
-                        <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Tìm hiểu thêm
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
 
         {/* Mac Section */}
@@ -187,38 +196,46 @@ const ProductShowcase = () => {
             <p className="text-lg text-gray-600">Sức mạnh đỉnh cao cho phát triển app, thiết kế và nghiên cứu</p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-8">
-            {macModels.map((model, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in" style={{animationDelay: `${index * 150}ms`}}>
-                <CardContent className="p-8">
-                  <img 
-                    src={model.image} 
-                    alt={model.name}
-                    className="w-full h-48 object-cover rounded-lg mb-6"
-                  />
-                  <h4 className="text-2xl font-bold text-gray-900 mb-2">{model.name}</h4>
-                  <div className="mb-4">
-                    <p className="text-gray-500 line-through">{model.price}</p>
-                    <p className="text-2xl font-bold text-blue-600">{model.educationPrice}</p>
-                    <p className="text-sm text-green-600 font-medium">Giá giáo dục</p>
+          <Carousel className="w-full max-w-7xl mx-auto">
+            <CarouselContent className="-ml-1">
+              {macModels.map((model, index) => (
+                <CarouselItem key={index} className="pl-1 md:basis-1/2">
+                  <div className="p-1">
+                    <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in" style={{animationDelay: `${index * 150}ms`}}>
+                      <CardContent className="p-8">
+                        <img 
+                          src={model.image} 
+                          alt={model.name}
+                          className="w-full h-48 object-cover rounded-lg mb-6"
+                        />
+                        <h4 className="text-2xl font-bold text-gray-900 mb-2">{model.name}</h4>
+                        <div className="mb-4">
+                          <p className="text-gray-500 line-through">{model.price}</p>
+                          <p className="text-2xl font-bold text-blue-600">{model.educationPrice}</p>
+                          <p className="text-sm text-green-600 font-medium">Giá giáo dục</p>
+                        </div>
+                        <p className="text-blue-600 font-medium mb-4">{model.bestFor}</p>
+                        <ul className="space-y-2 mb-6">
+                          {model.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-center text-gray-600">
+                              <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                          Xem cấu hình
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <p className="text-blue-600 font-medium mb-4">{model.bestFor}</p>
-                  <ul className="space-y-2 mb-6">
-                    {model.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-gray-600">
-                        <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Xem cấu hình
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
 
         {/* Software Section */}
@@ -251,15 +268,15 @@ const ProductShowcase = () => {
         </div>
 
         <div className="text-center mt-16">
-          <div className="bg-blue-50 rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-gradient-to-r from-brand-red to-red-600 rounded-2xl p-8 max-w-4xl mx-auto text-white">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Ưu đãi đặc biệt cho giáo dục
             </h3>
-            <p className="text-lg text-gray-600 mb-6">
-              Giảm giá lên đến 10% cho tất cả sản phẩm Apple khi mua cho trường học. 
+            <p className="text-lg text-red-100 mb-6">
+              <span className="bg-white/20 px-3 py-1 rounded-full font-bold">Giảm giá lên đến 10%</span> cho tất cả sản phẩm Apple khi mua cho trường học. 
               Tư vấn miễn phí về triển khai và đào tạo.
             </p>
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4">
+            <Button size="lg" className="bg-white text-brand-red hover:bg-gray-100 px-8 py-4 font-bold">
               Nhận báo giá cho trường học
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
